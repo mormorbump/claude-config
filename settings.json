@@ -1,0 +1,103 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Read|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/block-secrets.sh",
+            "statusMessage": "セキュリティチェック中..."
+          }
+        ]
+      },
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/notify-input.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/metrics.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/notify-input.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/notify.sh",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/sync-skills.sh",
+            "async": true,
+            "statusMessage": "skills同期中..."
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/sync-config.sh",
+            "async": true,
+            "statusMessage": "config同期中..."
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash $HOME/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "tsumiki@tsumiki": true,
+    "shinkoku@shinkoku": true
+  },
+  "extraKnownMarketplaces": {
+    "tsumiki": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/classmethod/tsumiki.git"
+      }
+    },
+    "shinkoku": {
+      "source": {
+        "source": "github",
+        "repo": "kazukinagata/shinkoku"
+      }
+    }
+  },
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "voiceEnabled": true,
+  "model": "jp.anthropic.claude-opus-4-8[1m]",
+  "skipWorkflowUsageWarning": true
+}

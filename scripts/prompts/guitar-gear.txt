@@ -1,0 +1,47 @@
+過去24時間の日本および海外のギター関連（機材・エフェクター・アンプ・演奏テクニック）の重要ニュースと新製品リリースを調査し、日本語で簡潔に要約してください。各項目は1-2文で、元記事・元ソースへのリンク付きで。何もなければ「特筆すべき更新なし」と報告してください。
+
+## 調査対象と情報源URL
+
+### 日本のギター情報
+- Guitar Magazine Web: https://guitarmagazine.jp/
+- Sound & Recording: https://www.snrec.jp/
+- デジマート (新着): https://www.digimart.net/magazine/
+- Ikebe楽器: https://www.ikebe-gakki.com/
+- BOSS / Roland blog: https://www.boss.info/jp/community/
+- ESP Guitars news: https://www.espguitars.co.jp/
+
+### 海外のギター情報
+- Guitar World: https://www.guitarworld.com/
+- Premier Guitar: https://www.premierguitar.com/
+- Reverb News: https://reverb.com/news
+- That Pedal Show (YouTube): https://www.youtube.com/@ThatPedalShow
+- Guitar Player: https://www.guitarplayer.com/
+- Sweetwater inSync: https://www.sweetwater.com/insync/
+
+### メーカー・新製品
+- Fender news: https://www.fender.com/articles
+- Gibson news: https://www.gibson.com/en-US/Blog
+- Strymon blog: https://www.strymon.net/blog/
+- Chase Bliss: https://www.chasebliss.com/
+- Universal Audio: https://www.uaudio.com/blog
+
+## 出力ルール
+- 各項目に必ず元記事・元ソースへのURLを含めること
+- URLが不明な場合は情報源トップページのURLを記載すること
+- 推測でURLを生成しないこと
+- 新製品は製品名・メーカー名・価格（わかれば）を明記すること
+
+## 出力フォーマット
+Guitar Gear Digest — {日付}
+
+新製品・リリース（あれば）
+- [メーカー名 - 製品名](URL) — 概要1-2文
+
+国内ニュース（あれば）
+- [見出し](URL) — 要約1-2文
+
+海外ニュース（あれば）
+- [見出し](URL) — 要約1-2文
+
+注目動画・レビュー（あれば）
+- [タイトル](URL) — 概要1文

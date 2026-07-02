@@ -1,0 +1,52 @@
+以下の情報源から、過去24時間の重要な更新を調査し、日本語で簡潔に要約してください。各項目は1-2文で、元記事へのリンク付きで。何もなければ「特筆すべき更新なし」と報告してください。
+
+## 調査対象（優先度順）と情報源URL
+
+### 1. Anthropic / Claude
+- Anthropic Research blog: https://www.anthropic.com/research
+- Anthropic API changelog: https://docs.anthropic.com/en/docs/about-claude/models
+- MCP spec releases: https://github.com/modelcontextprotocol/specification/releases
+- MCP servers repo: https://github.com/modelcontextprotocol/servers
+
+### 2. Google Gemini
+- Gemini API docs & changelog: https://ai.google.dev/gemini-api/docs
+- Google AI blog: https://blog.google/technology/ai/
+
+### 3. コーディングエージェント
+- Aider blog: https://aider.chat/blog/
+- Cursor blog: https://www.cursor.com/blog
+- SWE-bench: https://www.swebench.com/
+- OpenAI Codex CLI releases: https://github.com/openai/codex/releases
+
+### 4. LLMエージェント研究
+- arXiv cs.CL: https://arxiv.org/list/cs.CL/recent
+- arXiv cs.SE: https://arxiv.org/list/cs.SE/recent
+- Hugging Face Daily Papers: https://huggingface.co/papers
+
+### 5. LLMインフラ・運用
+- LiteLLM releases: https://github.com/BerriAI/litellm/releases
+- OpenRouter changelog: https://openrouter.ai/docs
+
+### 6. ニュースレター・ブログ
+- Interconnects (Nathan Lambert): https://www.interconnects.ai/
+- Simon Willison blog: https://simonwillison.net/
+- Lilian Weng blog: https://lilianweng.github.io/
+
+## 出力ルール
+- 各項目に必ず元記事・元リリースへのURLを含めること
+- URLが不明な場合は情報源トップページのURLを記載すること
+- 推測でURLを生成しないこと
+
+## 出力フォーマット
+AI Intelligence Digest — {日付}
+
+重要更新（あれば）
+- [タイトル](URL) — 要約1-2文
+
+新着論文・記事（あれば）
+- [タイトル](URL) — 要約1-2文
+
+ツール・API更新（あれば）
+- [タイトル](URL) — 要約1-2文
+
+所感（1文）

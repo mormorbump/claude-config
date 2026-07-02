@@ -1,0 +1,32 @@
+# whitelist方式: 全ignoreしてから必要なものだけ例外指定 (ADR-0001 Section 3)
+/*
+
+# --- track対象 ---
+!/.gitignore
+!/README.md
+!/CLAUDE.md
+!/keybindings.json
+!/settings.json
+!/statusline-command.sh
+
+!/rules/
+!/rules/**
+/rules/private/
+
+!/adr/
+!/adr/**
+
+!/hooks/
+!/hooks/**
+/hooks/*.bak
+
+!/scripts/
+!/scripts/**
+/scripts/.env
+/scripts/logs/
+/scripts/*.log
+/scripts/.DS_Store
+**/.DS_Store
+
+# skillsは別repoで管理(mormorbump/claude-skills)。ここでは絶対に触らない
+/skills/

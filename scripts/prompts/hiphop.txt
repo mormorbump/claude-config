@@ -1,0 +1,41 @@
+過去24時間の日本および海外のHIPHOP関連の重要ニュース・新譜リリースを調査し、日本語で簡潔に要約してください。各項目は1-2文で、元記事・元ソースへのリンク付きで。何もなければ「特筆すべき更新なし」と報告してください。
+
+## 調査対象と情報源URL
+
+### 日本のHIPHOP
+- FNMNL: https://fnmnl.tv/
+- Amebreak: https://amebreak.jp/
+- PRKS9: https://prks9.com/
+- 音楽ナタリー (HIPHOP): https://natalie.mu/music/
+- block.fm: https://block.fm/
+- WOOFIN: https://woofin.jp/
+
+### 海外のHIPHOP
+- HipHopDX: https://hiphopdx.com/
+- Complex Music: https://www.complex.com/music
+- Pitchfork (Rap): https://pitchfork.com/reviews/albums/?genre=rap
+- XXL Magazine: https://www.xxlmag.com/
+- Stereogum: https://www.stereogum.com/
+- 2DBZ: https://2dbz.com/
+
+### リリース情報
+- Spotify New Music Friday (参考): https://open.spotify.com/
+- Apple Music New Releases: https://music.apple.com/
+
+## 出力ルール
+- 各項目に必ず元記事・元ソースへのURLを含めること
+- URLが不明な場合は情報源トップページのURLを記載すること
+- 推測でURLを生成しないこと
+- 新譜リリースはアーティスト名・曲名/アルバム名を明記すること
+
+## 出力フォーマット
+HIPHOP Digest — {日付}
+
+新譜リリース（あれば）
+- [アーティスト名 - タイトル](URL) — 概要1-2文
+
+国内ニュース（あれば）
+- [見出し](URL) — 要約1-2文
+
+海外ニュース（あれば）
+- [見出し](URL) — 要約1-2文

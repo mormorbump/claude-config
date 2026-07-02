@@ -1,0 +1,17 @@
+{
+  "jobs": [
+    {
+      "name": "knowledge-extract",
+      "enabled": true,
+      "description": "前日のセッションtranscriptからナレッジ抽出してmemory受信箱へ",
+      "prompt_file": "prompts/knowledge-extract.md",
+      "model": "sonnet",
+      "allowed_tools": "Read Glob Grep Write Edit Bash(ls:*) Bash(find:*) Bash(tail:*) Bash(wc:*) Bash(stat:*)",
+      "permission_mode": "dontAsk",
+      "timeout_seconds": 900,
+      "backoff_limit": 1,
+      "concurrency_policy": "forbid",
+      "cwd": "~"
+    }
+  ]
+}
