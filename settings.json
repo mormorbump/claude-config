@@ -58,14 +58,14 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/sync-skills.sh",
-            "async": true,
-            "statusMessage": "skills同期中..."
+            "statusMessage": "skills同期中...",
+            "async": true
           },
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/sync-config.sh",
-            "async": true,
-            "statusMessage": "config同期中..."
+            "statusMessage": "config同期中...",
+            "async": true
           }
         ]
       }
@@ -95,9 +95,8 @@
   },
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "voiceEnabled": true,
-  "model": "jp.anthropic.claude-opus-4-8[1m]",
-  "skipWorkflowUsageWarning": true
+  "voiceEnabled": true
 }
