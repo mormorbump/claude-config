@@ -1,11 +1,11 @@
 #!/bin/bash
 # compact 引き継ぎ機構 (compact-prep / 60%通知 / 圧縮復旧) のテスト
-# marker の読み書きを TMPDIR 隔離で検証する
+# marker の読み書きを CLAUDE_TMP_BASE 隔離で検証する
 # 実行: bash ~/.claude/hooks/tests/test-compact-hooks.sh
 
 HOOKS="$HOME/.claude/hooks"
 SANDBOX=$(mktemp -d)
-export TMPDIR="$SANDBOX/"
+export CLAUDE_TMP_BASE="$SANDBOX"
 SID="test-session-0001"
 PASS=0; FAIL=0
 

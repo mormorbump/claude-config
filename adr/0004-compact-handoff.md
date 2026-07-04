@@ -9,12 +9,12 @@ Claude Code の compact（手動/自動）は会話履歴をLLM要約に置き�
 
 ## 決定
 
-3パーツ構成。hook間の通信は `${TMPDIR:-/tmp}` 配下の marker file のみ（Claude Codeにhook間状態共有機構がないため）。全hookは fail-open（常に exit 0）。
+3パーツ構成。hook間の通信は `~/.claude/tmp/` 配下の marker file のみ（Claude Codeにhook間状態共有機構がないため）。全スクリプトはベースを `CLAUDE_TMP_BASE` 環境変数で上書き可能（テスト隔離用）。全hookは fail-open（常に exit 0）。掃除は PostCompact hook が 7日超のファイルを find -delete で一元処理。
 
 ### 1. compact-prep skill（`~/.claude/skills/compact-prep/`）
 
 `/compact` 前にユーザーが叩く。要約に載りにくい判断構造・セッション状態を
-`${TMPDIR}/claude-compact-state/<session_id>.md` に固定フォーマットで保存する。
+`~/.claude/tmp/claude-compact-state/<session_id>.md` に固定フォーマットで保存する。
 session_id が取れなければ推測名で作らず停止（Hard gate）。
 
 ### 2. 圧縮復旧の2段 hook
@@ -45,13 +45,14 @@ skill の Bash から session_id を知る公式手段がないため:
 | claude-compact-warn | statusline | reminder hook | 通知したい |
 | claude-compact-warned | reminder hook | PostCompact hook | 通知済み cooldown |
 | claude-compacted | PostCompact hook | recovery hook | 圧縮直後 |
-| claude-session-map | session-map hook | (残置、reboot で消滅) | PID→session_id |
-| claude-compact-state | compact-prep skill | (残置) | 引き継ぎ本体 |
+| claude-session-map | session-map hook | PostCompact の7日掃除 | PID→session_id |
+| claude-compact-state | compact-prep skill | PostCompact の7日掃除 | 引き継ぎ本体 |
 
 ## 却下した代替案
 
 - SessionStart(matcher: compact) での直接注入: additionalContext 対応だが、記事の PostCompact + UserPromptSubmit 構成を採用（ユーザー指定でそのまま移植。marker 方式は plan pointer 等の拡張と共通機構になる）
 - PreCompact での手動 compact ブロック（stale handoff 時に弾く）: /compact の UX を全プロジェクトで変えるため見送り
+- 記事どおりの `${TMPDIR}` 配下への保存: グローバルルール（/tmp系に一時ファイルを作らない）と矛盾、macOSの自動掃除（3日/再起動）で state file が消える、skill が Write 時に TMPDIR を解決する摩擦がある、の3点で `~/.claude/tmp/` 固定に変更（2026-07-04）
 
 ## テスト
 
