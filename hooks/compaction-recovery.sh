@@ -11,13 +11,18 @@ INPUT=$(cat)
 SESSION_ID=$(printf '%s' "$INPUT" | jq -r '.session_id // empty' 2>/dev/null)
 [[ -z "$SESSION_ID" ]] && exit 0
 
+CLAUDE_TMP_BASE="${CLAUDE_TMP_BASE:-$HOME/.claude/tmp}"
+
 # marker file を書く（UserPromptSubmit が検出して context 注入→削除する）
-MARKER_DIR="${TMPDIR:-/tmp}/claude-compacted"
+MARKER_DIR="$CLAUDE_TMP_BASE/claude-compacted"
 mkdir -p "$MARKER_DIR" 2>/dev/null || true
 printf '%s\n' "$(date +%s)" > "$MARKER_DIR/$SESSION_ID" 2>/dev/null || true
 
 # compact が実行されたら 60% 警告の cooldown をリセットする
-WARN_DIR="${TMPDIR:-/tmp}/claude-compact-warned"
+WARN_DIR="$CLAUDE_TMP_BASE/claude-compact-warned"
 rm -f "$WARN_DIR/$SESSION_ID" 2>/dev/null || true
+
+# 7日超の古い state/marker/map を掃除（掃除はこの hook に一元化）
+find "$CLAUDE_TMP_BASE" -type f -mtime +7 -delete 2>/dev/null || true
 
 exit 0

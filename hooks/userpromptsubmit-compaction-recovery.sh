@@ -11,8 +11,10 @@ INPUT=$(cat)
 SESSION_ID=$(printf '%s' "$INPUT" | jq -r '.session_id // empty' 2>/dev/null)
 [[ -z "$SESSION_ID" ]] && exit 0
 
+CLAUDE_TMP_BASE="${CLAUDE_TMP_BASE:-$HOME/.claude/tmp}"
+
 # marker file がなければ何もしない
-MARKER_DIR="${TMPDIR:-/tmp}/claude-compacted"
+MARKER_DIR="$CLAUDE_TMP_BASE/claude-compacted"
 MARKER="$MARKER_DIR/$SESSION_ID"
 [[ -f "$MARKER" ]] || exit 0
 
@@ -20,7 +22,7 @@ MARKER="$MARKER_DIR/$SESSION_ID"
 rm -f "$MARKER" 2>/dev/null || true
 
 # session pointer file から active plan path を読む
-PTR_DIR="${TMPDIR:-/tmp}/claude-active-plan"
+PTR_DIR="$CLAUDE_TMP_BASE/claude-active-plan"
 PLAN_FILE=""
 if [[ -f "$PTR_DIR/$SESSION_ID" ]]; then
   PLAN_FILE=$(cat "$PTR_DIR/$SESSION_ID" 2>/dev/null || true)
@@ -36,7 +38,7 @@ if [[ -n "$PLAN_FILE" ]]; then
   CTX+=$'\n'"- plan mode が解除されている場合、plan ファイルが存在するのでユーザーに plan mode 再突入を確認せよ"
 fi
 
-STATE_DIR="${TMPDIR:-/tmp}/claude-compact-state"
+STATE_DIR="$CLAUDE_TMP_BASE/claude-compact-state"
 STATE_FILE="$STATE_DIR/$SESSION_ID.md"
 if [[ -f "$STATE_FILE" ]]; then
   CTX+=$'\n'"- state file \`${STATE_FILE}\` を Read で読み、作業状態を復元せよ"

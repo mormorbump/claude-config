@@ -9,7 +9,8 @@ INPUT=$(cat)
 SESSION_ID=$(printf '%s' "$INPUT" | jq -r '.session_id // empty' 2>/dev/null)
 [ -z "$SESSION_ID" ] && exit 0
 
-MAP_DIR="${TMPDIR:-/tmp}/claude-session-map"
+CLAUDE_TMP_BASE="${CLAUDE_TMP_BASE:-$HOME/.claude/tmp}"
+MAP_DIR="$CLAUDE_TMP_BASE/claude-session-map"
 mkdir -p "$MAP_DIR" 2>/dev/null || true
 
 # 祖先を辿って claude 本体プロセスを探し、その PID をキーに session_id を記録

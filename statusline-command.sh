@@ -53,9 +53,10 @@ if [ -n "$used_pct" ]; then
     # userpromptsubmit-compact-prep-reminder.sh が検出して context に注入する
     COMPACT_WARN_THRESHOLD=60
     if [ -n "$session_id" ] && [ "$pct_int" -ge "$COMPACT_WARN_THRESHOLD" ] 2>/dev/null; then
-        _warned_dir="${TMPDIR:-/tmp}/claude-compact-warned"
+        _tmp_base="${CLAUDE_TMP_BASE:-$HOME/.claude/tmp}"
+        _warned_dir="$_tmp_base/claude-compact-warned"
         if [ ! -f "$_warned_dir/$session_id" ]; then
-            _warn_dir="${TMPDIR:-/tmp}/claude-compact-warn"
+            _warn_dir="$_tmp_base/claude-compact-warn"
             mkdir -p "$_warn_dir" 2>/dev/null || true
             printf '%s\n' "$pct_int" > "$_warn_dir/$session_id" 2>/dev/null || true
         fi

@@ -15,7 +15,8 @@ if [ -n "${CLAUDE_SESSION_ID:-}" ]; then
 fi
 
 # 2. プロセス祖先 → session-map
-MAP_DIR="${TMPDIR:-/tmp}/claude-session-map"
+CLAUDE_TMP_BASE="${CLAUDE_TMP_BASE:-$HOME/.claude/tmp}"
+MAP_DIR="$CLAUDE_TMP_BASE/claude-session-map"
 pid=$$
 for _ in 1 2 3 4 5 6 7 8 9 10; do
   pid=$(ps -o ppid= -p "$pid" 2>/dev/null | tr -d ' ')

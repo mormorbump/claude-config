@@ -16,8 +16,10 @@ INPUT=$(cat)
 SESSION_ID=$(printf '%s' "$INPUT" | jq -r '.session_id // empty' 2>/dev/null)
 [[ -z "$SESSION_ID" ]] && exit 0
 
+CLAUDE_TMP_BASE="${CLAUDE_TMP_BASE:-$HOME/.claude/tmp}"
+
 # warn marker がなければ何もしない
-WARN_DIR="${TMPDIR:-/tmp}/claude-compact-warn"
+WARN_DIR="$CLAUDE_TMP_BASE/claude-compact-warn"
 WARN_MARKER="$WARN_DIR/$SESSION_ID"
 [[ -f "$WARN_MARKER" ]] || exit 0
 
@@ -29,7 +31,7 @@ CTX_PCT=${CTX_PCT:-"?"}
 rm -f "$WARN_MARKER" 2>/dev/null || true
 
 # cooldown marker を作成（statusline が再度 warn marker を書くのを防止）
-WARNED_DIR="${TMPDIR:-/tmp}/claude-compact-warned"
+WARNED_DIR="$CLAUDE_TMP_BASE/claude-compact-warned"
 mkdir -p "$WARNED_DIR" 2>/dev/null || true
 printf '%s\n' "$(date +%s)" > "$WARNED_DIR/$SESSION_ID" 2>/dev/null || true
 
