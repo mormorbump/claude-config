@@ -8,6 +8,7 @@ input=$(cat)
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // empty')
 model_id=$(echo "$input" | jq -r '.model.id // empty')
 used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+session_id=$(echo "$input" | jq -r '.session_id // empty')
 
 # --- Line 1: Current directory (replace $HOME with ~) ---
 display_cwd="${cwd/#$HOME/~}"
@@ -47,6 +48,19 @@ context_line=""
 if [ -n "$used_pct" ]; then
     # Build a 15-block progress bar
     pct_int=$(printf "%.0f" "$used_pct")
+
+    # 閾値超で compact-prep 警告 marker を書く（cooldown 中でなければ）
+    # userpromptsubmit-compact-prep-reminder.sh が検出して context に注入する
+    COMPACT_WARN_THRESHOLD=60
+    if [ -n "$session_id" ] && [ "$pct_int" -ge "$COMPACT_WARN_THRESHOLD" ] 2>/dev/null; then
+        _warned_dir="${TMPDIR:-/tmp}/claude-compact-warned"
+        if [ ! -f "$_warned_dir/$session_id" ]; then
+            _warn_dir="${TMPDIR:-/tmp}/claude-compact-warn"
+            mkdir -p "$_warn_dir" 2>/dev/null || true
+            printf '%s\n' "$pct_int" > "$_warn_dir/$session_id" 2>/dev/null || true
+        fi
+    fi
+
     filled=$(( pct_int * 15 / 100 ))
     empty=$(( 15 - filled ))
     bar=""

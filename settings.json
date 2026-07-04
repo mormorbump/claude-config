@@ -3,6 +3,35 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/userpromptsubmit-session-map.sh"
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/userpromptsubmit-compaction-recovery.sh"
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/userpromptsubmit-compact-prep-reminder.sh"
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/compaction-recovery.sh"
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash|Read|Grep",
