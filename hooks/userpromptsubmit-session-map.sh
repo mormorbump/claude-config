@@ -13,6 +13,9 @@ CLAUDE_TMP_BASE="${CLAUDE_TMP_BASE:-$HOME/.claude/tmp}"
 MAP_DIR="$CLAUDE_TMP_BASE/claude-session-map"
 mkdir -p "$MAP_DIR" 2>/dev/null || true
 
+# 7日超の古い map を自己掃除
+find "$MAP_DIR" -type f -mtime +7 -delete 2>/dev/null || true
+
 # 祖先を辿って claude 本体プロセスを探し、その PID をキーに session_id を記録
 pid=$$
 for _ in 1 2 3 4 5 6 7 8 9 10; do

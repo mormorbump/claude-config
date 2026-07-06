@@ -9,25 +9,6 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/userpromptsubmit-session-map.sh"
-          },
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/userpromptsubmit-compaction-recovery.sh"
-          },
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/userpromptsubmit-compact-prep-reminder.sh"
-          }
-        ]
-      }
-    ],
-    "PostCompact": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/compaction-recovery.sh"
           }
         ]
       }
@@ -111,7 +92,8 @@
   },
   "enabledPlugins": {
     "tsumiki@tsumiki": true,
-    "shinkoku@shinkoku": true
+    "shinkoku@shinkoku": true,
+    "compact-plus@compact-plus-local": true
   },
   "extraKnownMarketplaces": {
     "tsumiki": {
@@ -124,6 +106,12 @@
       "source": {
         "source": "github",
         "repo": "kazukinagata/shinkoku"
+      }
+    },
+    "compact-plus-local": {
+      "source": {
+        "source": "github",
+        "repo": "u-ichi/compact-plus"
       }
     }
   },

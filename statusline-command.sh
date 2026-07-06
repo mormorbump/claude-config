@@ -49,11 +49,12 @@ if [ -n "$used_pct" ]; then
     # Build a 15-block progress bar
     pct_int=$(printf "%.0f" "$used_pct")
 
-    # 閾値超で compact-prep 警告 marker を書く（cooldown 中でなければ）
-    # userpromptsubmit-compact-prep-reminder.sh が検出して context に注入する
+    # 閾値超で compact 警告 marker を書く（cooldown 中でなければ）
+    # compact-plus plugin の reminder hook が検出して context に注入する。
+    # marker のパス規約は plugin 側 (${TMPDIR:-/tmp}) に合わせる (ADR-0005)
     COMPACT_WARN_THRESHOLD=60
     if [ -n "$session_id" ] && [ "$pct_int" -ge "$COMPACT_WARN_THRESHOLD" ] 2>/dev/null; then
-        _tmp_base="${CLAUDE_TMP_BASE:-$HOME/.claude/tmp}"
+        _tmp_base="${CLAUDE_TMP_BASE:-${TMPDIR:-/tmp}}"
         _warned_dir="$_tmp_base/claude-compact-warned"
         if [ ! -f "$_warned_dir/$session_id" ]; then
             _warn_dir="$_tmp_base/claude-compact-warn"

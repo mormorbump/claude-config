@@ -1,7 +1,7 @@
 # ADR-0004: compact 前後の引き継ぎ機構（compact-prep + marker hooks + 60%通知）
 
 Date: 2026-07-04
-Status: Accepted
+Status: Superseded by [ADR-0005](0005-compact-plus-plugin.md)（compact-plus plugin 採用。statusline producer と session-map/get-session-id のみ存続）
 
 ## 背景
 
