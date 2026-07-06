@@ -95,6 +95,11 @@
             "command": "$HOME/.claude/hooks/sync-config.sh",
             "statusMessage": "config同期中...",
             "async": true
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/fable-cost.py",
+            "async": true
           }
         ]
       }
