@@ -19,6 +19,8 @@
 !/hooks/
 !/hooks/**
 /hooks/*.bak
+# マシンごとに毎回書き換わる状態ファイル（為替レートキャッシュ）。trackするとsync競合の原因になる
+/hooks/.fable-cost-rate.json
 
 !/scripts/
 !/scripts/**
