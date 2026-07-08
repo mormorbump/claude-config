@@ -24,6 +24,10 @@
 
 !/scripts/
 !/scripts/**
+
+# 昇格知見の回帰eval(ADR-0007)。昇格先(CLAUDE.md/rules)がsyncされるためevalも同期する
+!/evals/
+!/evals/**
 /scripts/.env
 /scripts/logs/
 /scripts/*.log

@@ -10,16 +10,23 @@
 
 ## Decision
 
-### 1. 実行ログ(`~/.claude/dream-log/DREAM_LOG.md`)
+### 1. 実行ログ(`~/.claude/metrics/dream.jsonl`)
 
-- 追記専用のmarkdownテーブル。1実行=1行。列: `Date, Scope, Mined, Consolidated, Promoted, Pruned, EvalsRun, EvalsPass, EvalsFail, EvalsCreated, SkillProposals`。
-- `SkillProposals` は今回「skill化を提案」した候補名をカンマ区切りで記録(実際に作るかはユーザー判断のため、提案止まり)。
-- git管理(claude-config repo)。EVAL_INDEX.mdと同じ「テーブルで足りる、DB/グラフは作らない」思想。
+- 追記専用のJSONL。1実行=1行:
+
+```json
+{"ts":"2026-07-08T12:00:00Z","scope":"-Users-matsumotokazuki","mined":5,"consolidated":3,"promoted":2,"pruned":4,"evals_run":3,"evals_pass":3,"evals_fail":0,"evals_created":1,"skill_proposals":["foo-workflow"]}
+```
+
+- `skill_proposals` は今回「skill化を提案」した候補名の配列(実際に作るかはユーザー判断のため、提案止まり)。
+- 追記はスキル実行中のClaudeが行う(専用hookは作らない)。mined/promoted等の件数はモデル自身にしか分からない自己申告値であり、hookで決定的に取れるものではない。eval合否のみ実コマンド実行の結果。
+- 置き場所は既存の `jobs-YYYY-MM.jsonl` と同じmetrics層 = **マシンローカル・git非同期**(ADR-0006、READMEの「ローカル層」)。auto memory自体がマシンローカルなので、その整理履歴もマシンローカルが整合的。実行頻度が低いため月次分割せず単一ファイル。
+- 人間はこのJSONLを直接読まない。読むためのビューがstatusモード(下記)。
 
 ### 2. statusモード(読み取り専用、既存フローを実行しない)
 
 - `/memory-dream status`(または「メモリ整理の状況を教えて」「dreamのメトリクス」等の自然文)で起動。
-- `DREAM_LOG.md` の直近実行群 + 全scopeの `EVAL_INDEX.md` を読み、以下を報告する:
+- `~/.claude/metrics/dream.jsonl` + 全scopeの `EVAL_INDEX.md` を読み、人間が読みやすい形(要約+小さなテーブル)に整形して以下を報告する:
   - 最終実行日、累計実行回数、累計昇格件数
   - 直近実行のeval合否件数と、その前回実行との比較(悪化/改善/横ばい)
   - 現在failしているevalの一覧(要対応)
@@ -34,5 +41,10 @@
 
 ## Consequences
 
-- 実行のたびにDREAM_LOG.mdへ1行追記するコストのみで、フィードバックループの健全性を後から検証できるようになる。
-- 「スキル化提案が放置されている」ことが可視化され、compact-plus的な放置ノイズを防ぐ。
+- 実行のたびにdream.jsonlへ1行追記するコストのみで、フィードバックループの健全性を後から検証できるようになる。
+- 「スキル化提案が放置されている」ことが可視化され、放置ノイズを防ぐ。
+- 履歴はマシンローカルのため、PC間で実行履歴は共有されない(auto memory自体が共有されないので許容)。
+
+## 改訂履歴
+
+- 2026-07-08: 初版はgit管理のmarkdownテーブル(`~/.claude/dream-log/DREAM_LOG.md`)としたが、同日中に構造化データ(JSONL)・metrics層(マシンローカル)へ変更。理由: 機械集計のしやすさ、既存metrics規約(`jobs-*.jsonl`)との整合、whitelist方式.gitignoreでdream-log/が同期対象外だった事実との整合。人間可読性はstatusモードの整形出力で担保する。
