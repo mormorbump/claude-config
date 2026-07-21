@@ -36,3 +36,9 @@
 
 # skillsは別repoで管理(mormorbump/claude-skills)。ここでは絶対に触らない
 /skills/
+
+# Claude Code on the web 用のproject設定（ADR-0010）。このrepoがクラウドで開かれた時に読まれる
+!/.claude/
+!/.claude/**
+# クラウド側で session-start.sh が clone する claude-skills。生成物なのでtrackしない（ADR-0006の原則）
+/.claude/skills/
