@@ -23,14 +23,15 @@ Claude Code on the web（claude.ai/code）の Routine で開発タスクを定�
 1. **切り分け基準**: Routine/クラウドセッションに効かせたい設定・ルール・スキルは対象repoのgit管理層へコミットする。全プロジェクト共通スキルは claude.ai 側の有効化で配る。手元の `~/.claude` だけにあるものはクラウドでは存在しないものとして扱う。/memory-dream の昇格判断に「クラウドで効かせる必要があるか」の観点を加える
 2. claude-config repoにネストした `/.claude/`（settings.json + hooks/session-start.sh）を追加し、このrepoがクラウドで開かれた時のブートストラップとする
 3. session-start.sh は `CLAUDE_CODE_REMOTE` ガードで非クラウド時は即終了（ローカル無害・低レイテンシ）。クラウドでは claude-skills(private) を `<repo>/.claude/skills` に shallow clone する
-4. Routineは個人アカウント紐付けでチーム共有機能がない点に留意（org repoでは登録の重複に注意）。まず claude-config 対象の低リスクRoutine（毎朝のPR rebase + ブートストラップ検証）でhook動作・スキル認識・トークン消費の肌感を検証してから他repoへ展開する
+4. Routineは個人アカウント紐付けでチーム共有機能がない点に留意（org repoでは登録の重複に注意）
+5. **Routineの対象は実開発repoのみ。claude-config には Routine を向けない**。claude-config は sync-config.sh（Stop hook）による双方向syncで運用しており、書き込み系Routineを向けるとADR-0006型のsync競合の火種になる。claude-config 内のネスト `/.claude/` は「各開発repoへコピーするテンプレートの原本」として保持する（ローカルでは即終了、Routine未登録ならクラウドでも起動しないため実害なし）。配管の検証（hook発火→private clone→スキル認識）は実repoでの初回Routine実行ログで行う
 
 ## 実施
 
 - `/.claude/settings.json`: hooks.SessionStart に session-start.sh を登録（timeout 300s）
 - `/.claude/hooks/session-start.sh`: クラウド判定 → claude-skills clone → `reloadSkills` + `additionalContext` をJSON出力
 - `.gitignore`: whitelist に `!/.claude/` `!/.claude/**` を追加。クラウド側clone物の `/.claude/skills/` は個別ignore（ADR-0006「生成物をtrackしない」原則）
-- Routine「毎朝PR rebase」は claude.ai/code/routines（Web UI）で登録する。注意: デスクトップ/CLIの scheduled-tasks MCP（~/.claude/scheduled-tasks/）は「アプリが開いている間だけローカル実行」される別機能であり、クラウドRoutineではない
+- Routineは claude.ai/code/routines（Web UI）で実開発repoに対して登録する（claude-config向けの「毎朝PR rebase」案は取りやめ）。注意: デスクトップ/CLIの scheduled-tasks MCP（~/.claude/scheduled-tasks/）は「アプリが開いている間だけローカル実行」される別機能であり、クラウドRoutineではない
 
 ## 未確認事項
 
