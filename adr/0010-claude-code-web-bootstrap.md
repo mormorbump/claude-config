@@ -24,7 +24,8 @@ Claude Code on the web（claude.ai/code）の Routine で開発タスクを定�
 2. claude-config repoにネストした `/.claude/`（settings.json + hooks/session-start.sh）を追加し、このrepoがクラウドで開かれた時のブートストラップとする
 3. session-start.sh は `CLAUDE_CODE_REMOTE` ガードで非クラウド時は即終了（ローカル無害・低レイテンシ）。クラウドでは claude-skills(private) を `<repo>/.claude/skills` に shallow clone する
 4. Routineは個人アカウント紐付けでチーム共有機能がない点に留意（org repoでは登録の重複に注意）
-5. **Routineの対象は実開発repoのみ。claude-config には Routine を向けない**。claude-config は sync-config.sh（Stop hook）による双方向syncで運用しており、書き込み系Routineを向けるとADR-0006型のsync競合の火種になる。claude-config 内のネスト `/.claude/` は「各開発repoへコピーするテンプレートの原本」として保持する（ローカルでは即終了、Routine未登録ならクラウドでも起動しないため実害なし）。配管の検証（hook発火→private clone→スキル認識）は実repoでの初回Routine実行ログで行う
+5. **クライアント/チーム共用repoは「コミットゼロの最小構成」を基本とする**。SessionStart hookはそのrepoを使う全メンバーのローカルセッションでも毎回実行されるため、Routine都合のセットアップ（pip install等）はrepoにhookとしてコミットせず、Routineプロンプトの冒頭ステップに書く。repoへの設定コミットが正当化されるのは、チーム全体に利益がある場合のみ。個人スキルもクライアントrepoには注入しない（repo自前のCLAUDE.md/pluginで動かす）
+6. **Routineの対象は実開発repoのみ。claude-config には Routine を向けない**。claude-config は sync-config.sh（Stop hook）による双方向syncで運用しており、書き込み系Routineを向けるとADR-0006型のsync競合の火種になる。claude-config 内のネスト `/.claude/` は「各開発repoへコピーするテンプレートの原本」として保持する（ローカルでは即終了、Routine未登録ならクラウドでも起動しないため実害なし）。配管の検証（hook発火→private clone→スキル認識）は実repoでの初回Routine実行ログで行う
 
 ## 実施
 
