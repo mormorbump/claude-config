@@ -120,5 +120,32 @@
   "skipWorkflowUsageWarning": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured",
+      "**Cloud provider(s)**: AWS and Google Cloud appear in shell history (aws 61x, gcloud 23x); no org-level provider configuration was found in this project",
+      "**Repository visibility**: assume private unless the remote host and repo name indicate otherwise, or a visibility check in the transcript shows public — the working directory (/Users/matsumotokazuki) has no git remotes and gh could not resolve an owner/repo, so visibility is unverified",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: not determinable — origin/HEAD is unset and no remote exists, so the gh visibility/branch-protection query could not run",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Source control**: The trusted repo and its remote(s) only (no additional orgs configured) — as scoped by the Trusted repo and Repository visibility entries above; this working directory currently has no configured remote",
+      "**Trusted internal domains**: None configured — kyazm.github.io was contacted in session transcripts but is a public GitHub Pages host, not an internal domain",
+      "**Trusted cloud buckets**: None configured — every bucket name found by the config scan (bucket, bucket-name, my-bucket, example-bucket, customer_bucket, etc.) is a generic placeholder or documentation example, appears only in repo files, and is not corroborated by any transcript usage; no prefix cluster (bucket-*, my-*, example-*, some-*) is org-identifying, so no wildcard is proposed",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar. Note the project rules reference rules/private/identity.md (git-untracked, account-specific identity data) — treat it as sensitive.",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited — e.g. matches `prod-db`, not `producer`)",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development",
+      "**Trusted repo**: The git repository the agent started in (its working directory) and its configured remote(s). When the repo's public/private visibility is given — by the Repository visibility entry or the user's own message — use it to scope what is OK to commit or push there: confidential material is fine in a private repo; in a public one, only that repo's own work is — and content ported, repointed, or first read from outside this session's repo is not its own work, whoever directed the port. Visibility scopes confidential material only: secrets and sensitive data (personal & entrusted) are never cleared into any repo by its visibility (see Definitions). Here the working directory is the home directory itself with 0 tracked files and no remote — treat writes outside an explicit project subdirectory with extra care.",
+      "**Org-specific CLIs**: None configured — observed non-standard CLIs are general-purpose tooling (ccusage, yt-dlp, clawhub, openclaw, nodebrew, brew, npx, osascript)"
+    ]
+  }
 }
