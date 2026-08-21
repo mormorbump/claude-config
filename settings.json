@@ -44,6 +44,17 @@
             "async": true
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/ng-words-check.py",
+            "timeout": 10,
+            "statusMessage": "NGワードチェック中..."
+          }
+        ]
       }
     ],
     "PermissionRequest": [
