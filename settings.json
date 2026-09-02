@@ -131,7 +131,6 @@
   "skipWorkflowUsageWarning": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "voiceEnabled": true,
   "autoMode": {
     "environment": [
       "### Org-wide",
@@ -158,5 +157,7 @@
       "**Trusted repo**: The git repository the agent started in (its working directory) and its configured remote(s). When the repo's public/private visibility is given — by the Repository visibility entry or the user's own message — use it to scope what is OK to commit or push there: confidential material is fine in a private repo; in a public one, only that repo's own work is — and content ported, repointed, or first read from outside this session's repo is not its own work, whoever directed the port. Visibility scopes confidential material only: secrets and sensitive data (personal & entrusted) are never cleared into any repo by its visibility (see Definitions). Here the working directory is the home directory itself with 0 tracked files and no remote — treat writes outside an explicit project subdirectory with extra care.",
       "**Org-specific CLIs**: None configured — observed non-standard CLIs are general-purpose tooling (ccusage, yt-dlp, clawhub, openclaw, nodebrew, brew, npx, osascript)"
     ]
-  }
+  },
+  "voiceEnabled": true,
+  "preferredNotifChannel": "terminal_bell"
 }
