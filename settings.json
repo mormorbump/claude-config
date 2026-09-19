@@ -129,6 +129,7 @@
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
+  "preferredNotifChannel": "terminal_bell",
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "autoMode": {
@@ -158,6 +159,5 @@
       "**Org-specific CLIs**: None configured — observed non-standard CLIs are general-purpose tooling (ccusage, yt-dlp, clawhub, openclaw, nodebrew, brew, npx, osascript)"
     ]
   },
-  "voiceEnabled": true,
-  "preferredNotifChannel": "terminal_bell"
+  "voiceEnabled": true
 }
