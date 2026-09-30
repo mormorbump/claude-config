@@ -104,7 +104,8 @@
   "enabledPlugins": {
     "tsumiki@tsumiki": true,
     "shinkoku@shinkoku": true,
-    "compact-plus@compact-plus-local": true
+    "compact-plus@compact-plus-local": true,
+    "jev-lint@jev-lint": true
   },
   "extraKnownMarketplaces": {
     "tsumiki": {
@@ -123,6 +124,12 @@
       "source": {
         "source": "github",
         "repo": "u-ichi/compact-plus"
+      }
+    },
+    "jev-lint": {
+      "source": {
+        "source": "github",
+        "repo": "mizchi/jev-lint"
       }
     }
   },
