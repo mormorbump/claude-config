@@ -166,5 +166,6 @@
       "**Org-specific CLIs**: None configured — observed non-standard CLIs are general-purpose tooling (ccusage, yt-dlp, clawhub, openclaw, nodebrew, brew, npx, osascript)"
     ]
   },
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "switchModelsOnFlag": true
 }
